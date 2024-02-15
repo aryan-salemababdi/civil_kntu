@@ -21,3 +21,10 @@ const articleDropdown = () => {
   }
 };
 
+
+const backUp = value => {
+  window.scrollTo({
+    top: value,
+    behavior: "smooth",
+  });
+};
