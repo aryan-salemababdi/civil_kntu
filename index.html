@@ -1,13 +1,432 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/stylesheet/index.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/91a94a4ac2.js" crossorigin="anonymous"></script>
+  <title>Civil_Kntu</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="d-none d-sm-block">
+        <div class="d-flex justify-content-between mx-5 my-2">
+          <div class="my-2 mx-3 w-50">
+            <form action="/search" method="get">
+              <div class="position-relative">
+                <input type="text" name="query" class="form-control search-box" placeholder="search ..."
+                  style="background: #F0F0F0;">
+                <i class="fas fa-search search-icon"></i>
+              </div>
+            </form>
+          </div>
+          <div>
+            <img src="public/images/logo/KNTU.png" alt="logo" width="75" />
+          </div>
+        </div>
+        <ul class="nav mx-5" style="background: #122D66; border-radius:10px;">
+          <li class="parent-item nav-item">
+            <a class=" nav-link active text-decoration-none my-2" style="text-decoration: none;color: #FFFFFF;"
+              href="#">Home</a>
+          </li>
+          <li class="parent-item nav-item">
+            <a class="nav-link my-2" style="text-decoration: none;color: #FFFFFF" href="#">News</a>
+          </li>
+          <li class="parent-item menu-item">
+            <p class=" btn active text-decoration-none my-2" style="color: #FFFFFF;">About<span><i
+                  class="fa-sharp fa-solid fa-caret-down mx-1"></i></span></p>
+            <ul class="division">
+              <li>
+                <a href="/" style="text-decoration: none;">Mission Statement</a>
+              </li>
+              <hr />
+              <li>
+                <a href="/" style="text-decoration: none;">Vision</a>
+              </li>
+              <hr />
+              <li>
+                <a href="/" style="text-decoration: none;">History</a>
+              </li>
+            </ul>
+          </li>
+          <li class="parent-item nav-item">
+            <a class="nav-link my-2" style="text-decoration: none;color: #FFFFFF;" href="#">Undergraduate</a>
+          </li>
+          <li class="parent-item nav-item">
+            <a class="nav-link my-2" style="text-decoration: none;color: #FFFFFF;" href="#">Graduate</a>
+          </li>
+          <li class="parent-item nav-item">
+            <a class="nav-link my-2" style="text-decoration: none;color: #FFFFFF;" href="#">Give</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-block d-sm-none">
+        <div class="d-flex align-items-center">
+          <img src="public/images/logo/KNTU.png" alt="logo" width="75" />
+        </div>
+        <div class="row align-items-center m-3">
+          <div class="col">
+            <button class="btn" onclick="openSidebar()">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+          </div>
+          <div class="col">
+            <form action="/search" method="get">
+              <div class="position-relative">
+                <input type="text" name="query" placeholder="search ..." class="form-control search-box"
+                  style="background: #F0F0F0;">
+                <i class="fas fa-search search-icon"></i>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar" id="sidebar">
+        <div class="m-2" style="text-align: right;">
+          <button class="btn" onclick="closeSidebar()">
+            <i class="fa-solid fa-xmark" style="color: #ffffff; font-size: 1rem;"></i>
+          </button>
+        </div>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active text-decoration-none text-white" href="#">Home</a>
+          </li>
+          <hr class="w-75" style="border:0.5px solid gray;" />
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">News</a>
+          </li>
+          <hr class="w-75" style="border:0.5px solid gray;" />
+          <li class="nav-item dropdownx w-100" id="articlesDropdown">
+            <button onclick="articleDropdown()" class="btn text-white">
+              About
+              <i class="fa-sharp fa-solid fa-caret-down rotate-icon"></i>
+            </button>
+            <div id="dropdownMenu" class="dropdownx-menu">
+              <a class="dropdown-item" href="#">Mission Statement</a>
+              <a class="dropdown-item" href="#">Vision</a>
+              <a class="dropdown-item" href="#">History</a>
+            </div>
+          </li>
+
+          <hr class="w-75" style="border:0.5px solid gray;" />
+          <li class="nav-item">
+            <a class="nav-link text-white" style="color: black;" href="#">Undergraduate</a>
+          </li>
+          <hr class="w-75" style="border:0.5px solid gray;" />
+          <li class="nav-item">
+            <a class="nav-link text-white" style="color: black;" href="#">Graduate</a>
+          </li>
+          <hr class="w-75" style="border:0.5px solid gray;" />
+          <li class="nav-item">
+            <a class="nav-link text-white" style="color: black;" href="#">Give</a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+  </header>
+  <main>
+
+
+    <div class="banner my-3 mx-5">
+      <h2 class="text-bold">
+        Faculty of Civil Engineering
+      </h2>
+      <h2>
+        K. N. Toosi University of Technology
+      </h2>
+      <div>
+        <img src="public/images/banner/2017280102339logoCivil963.png" alt="banner" style="width:270px;" />
+      </div>
+    </div>
+
+
+
+    <div class="d-block d-sm-none">
+      <swiper-container class="mySwiper" pagination="true">
+        <swiper-slide>
+          <div class="card  m-4 shadow " style="width: 18rem;">
+            <img src="public/images/other/Campus.jpg" class="card-img-top" alt="other">
+            <div class="card-body">
+              <h6 class="card-title" style="color: orange;">Undergraduate Experience</h6>
+              <h4 class="card-title" style="color: #1F3071;">K. N. Toosi University of Technology</h4>
+              <p class="card-text">Come join the largest community of civil engineering and environmental
+                engineering
+                majors in the UC system</p>
+              <div class="d-flex justify-content-between">
+                <div class=" justify-content-end">
+                  <button class="btn text-light bg-warning rounded-pill ">
+                    <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                    Read More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="card  m-4 shadow " style="width: 18rem;">
+            <img src="public/images/other/Campus.jpg" class="card-img-top" alt="other">
+            <div class="card-body">
+              <h6 class="card-title" style="color: orange;">Undergraduate Experience</h6>
+              <h4 class="card-title" style="color: #1F3071;">K. N. Toosi University of Technology</h4>
+              <p class="card-text">Come join the largest community of civil engineering and environmental
+                engineering
+                majors in the UC system</p>
+              <div class="d-flex justify-content-between">
+                <div class=" justify-content-end">
+                  <button class="btn text-light bg-warning rounded-pill ">
+                    <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                    Read More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="card  m-4 shadow " style="width: 18rem;">
+            <img src="public/images/other/Campus.jpg" class="card-img-top" alt="other">
+            <div class="card-body">
+              <h6 class="card-title" style="color: orange;">Undergraduate Experience</h6>
+              <h4 class="card-title" style="color: #1F3071;">K. N. Toosi University of Technology</h4>
+              <p class="card-text">Come join the largest community of civil engineering and environmental
+                engineering
+                majors in the UC system</p>
+              <div class="d-flex justify-content-between">
+                <div class=" justify-content-end">
+                  <button class="btn text-light bg-warning rounded-pill ">
+                    <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                    Read More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+    <div class="d-none d-sm-block" style="background: #E9EDF0;">
+      <div class=" d-flex flex-wrap justify-content-center">
+        <div class="card  m-4 shadow " style="width: 18rem;">
+          <img src="public/images/other/Campus.jpg" class="card-img-top" alt="other">
+          <div class="card-body">
+            <h6 class="card-title" style="color: orange;">Undergraduate Experience</h6>
+            <h4 class="card-title" style="color: #1F3071;">K. N. Toosi University of Technology</h4>
+            <p class="card-text">Come join the largest community of civil engineering and environmental engineering
+              majors in the UC system</p>
+            <div>
+              <button class="btn text-light bg-warning rounded-pill ">
+                <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                Read More
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card  m-4 shadow " style="width: 18rem;">
+          <img src="public/images/other/Campus.jpg" class="card-img-top" alt="other">
+          <div class="card-body">
+            <h6 class="card-title" style="color: orange;">Undergraduate Experience</h6>
+            <h4 class="card-title" style="color: #1F3071;">K. N. Toosi University of Technology</h4>
+            <p class="card-text">Come join the largest community of civil engineering and environmental engineering
+              majors in the UC system</p>
+            <div>
+              <button class="btn text-light bg-warning rounded-pill ">
+                <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                Read More
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card  m-4 shadow " style="width: 18rem;">
+          <img src="public/images/other/Campus.jpg" class="card-img-top" alt="other">
+          <div class="card-body">
+            <h6 class="card-title" style="color: orange;">Undergraduate Experience</h6>
+            <h4 class="card-title" style="color: #1F3071;">K. N. Toosi University of Technology</h4>
+            <p class="card-text">Come join the largest community of civil engineering and environmental engineering
+              majors in the UC system</p>
+            <div>
+              <button class="btn text-light bg-warning rounded-pill ">
+                <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                Read More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    <div>
+      <h2 class="my-4" style="text-align: center;color: #1F3071;">
+        Events
+      </h2>
+      <div class="d-block d-sm-none">
+        <swiper-container class="mySwiper" pagination="true">
+          <swiper-slide>
+            <div class="card  m-4 shadow " style="width: 18rem;">
+              <img src="public/images/other/Webinar-OilGAS_Dey_1402.jpg" style="height:300px;" class="card-img-top"
+                alt="other">
+              <div class="card-body">
+                <h6 class="card-title" style="color: orange;">2024/2/27</h6>
+                <h4 class="card-title" style="color: #1F3071;">Hydraulic fracturing as a tool for insitu recovery of
+                  valuable mineral</h4>
+                <div class="d-flex justify-content-between">
+                  <div class=" justify-content-end">
+                    <button class="btn text-light bg-warning rounded-pill ">
+                      <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                      Read More
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="card  m-4 shadow " style="width: 18rem;">
+              <img src="public/images/other/Webinar-OilGAS_Dey_1402.jpg" style="height:300px;" class="card-img-top"
+                alt="other">
+              <div class="card-body">
+                <h6 class="card-title" style="color: orange;">2024/2/27</h6>
+                <h4 class="card-title" style="color: #1F3071;">Hydraulic fracturing as a tool for insitu recovery of
+                  valuable mineral</h4>
+                <div class="d-flex justify-content-between">
+                  <div class=" justify-content-end">
+                    <button class="btn text-light bg-warning rounded-pill ">
+                      <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                      Read More
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="card  m-4 shadow " style="width: 18rem;">
+              <img src="public/images/other/Webinar-OilGAS_Dey_1402.jpg" style="height:300px;" class="card-img-top"
+                alt="other">
+              <div class="card-body">
+                <h6 class="card-title" style="color: orange;">2024/2/27</h6>
+                <h4 class="card-title" style="color: #1F3071;">Hydraulic fracturing as a tool for insitu recovery of
+                  valuable mineral</h4>
+                <div class="d-flex justify-content-between">
+                  <div class=" justify-content-end">
+                    <button class="btn text-light bg-warning rounded-pill ">
+                      <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                      Read More
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+      <div class="d-none d-sm-block">
+        <div class=" d-flex flex-wrap justify-content-center">
+          <div class="card  m-4 shadow " style="width: 18rem;">
+            <img src="public/images/other/Webinar-OilGAS_Dey_1402.jpg" style="height:300px;" class="card-img-top"
+              alt="other">
+            <div class="card-body">
+              <h6 class="card-title" style="color: orange;">2024/2/27</h6>
+              <h4 class="card-title" style="color: #1F3071;">Hydraulic fracturing as a tool for insitu recovery of
+                valuable mineral</h4>
+              <div class="d-flex justify-content-between">
+                <div class=" justify-content-end">
+                  <button class="btn text-light bg-warning rounded-pill ">
+                    <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                    Read More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card  m-4 shadow " style="width: 18rem;">
+            <img src="public/images/other/Webinar-OilGAS_Dey_1402.jpg" style="height:300px;" class="card-img-top"
+              alt="other">
+            <div class="card-body">
+              <h6 class="card-title" style="color: orange;">2024/2/27</h6>
+              <h4 class="card-title" style="color: #1F3071;">Hydraulic fracturing as a tool for insitu recovery of
+                valuable mineral</h4>
+              <div class="d-flex justify-content-between">
+                <div class=" justify-content-end">
+                  <button class="btn text-light bg-warning rounded-pill ">
+                    <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                    Read More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card  m-4 shadow " style="width: 18rem;">
+            <img src="public/images/other/Webinar-OilGAS_Dey_1402.jpg" style="height:300px;" class="card-img-top"
+              alt="other">
+            <div class="card-body">
+              <h6 class="card-title" style="color: orange;">2024/2/27</h6>
+              <h4 class="card-title" style="color: #1F3071;">Hydraulic fracturing as a tool for insitu recovery of
+                valuable mineral</h4>
+              <div class="d-flex justify-content-between">
+                <div class=" justify-content-end">
+                  <button class="btn text-light bg-warning rounded-pill ">
+                    <img src="public/images/Vector.png" alt="vector" class="mb-1">
+                    Read More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center my-3">
+      <button class="btn text-light" style="background-color: #1F3071;">
+        More
+      </button>
+    </div>
+    </div>
+
+
+    <h2 class="mt-4" style="text-align: center;color: #1F3071;">
+      Contact Us
+    </h2>
+    <div class="contactus m-5">
+      <div class="contact-link">
+        <div class="contact-tooltip-postal">1996715433</div>
+        <i class="fa-solid fa-envelopes-bulk" style="font-size:2rem;"></i>
+      </div>
+      <div class="contact-link">
+        <div class="contact-tooltip-email">infoce@kntu.ac.ir</div>
+        <i class="fa-solid fa-envelope" style="font-size: 2rem;"></i>
+      </div>
+      <div class="contact-link">
+        <div class="contact-tooltip-telephone">02188779474-5</div>
+        <i class="fa-solid fa-phone" style="font-size:2rem;"></i>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="footer">
+      <h5 class="m-0 p-2">
+        &copy;All Rights Reserved. Khajeh Nasir Toosi University of Technology
+      </h5>
+    </div>
+  </footer>
+  <script src="src/js/main.js"></script>
+</body>
+
 </html>

@@ -1,0 +1,325 @@
+body {
+    margin: 0;
+    padding: 0;
+    z-index: 10000;
+}
+
+.search-box {
+    padding-right: 2.5rem;
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.representatives {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.step-line {
+    position: absolute;
+    width: calc(100% - 40px);
+    top: 50%;
+    left: 20px;
+    border: 1px solid red;
+    z-index: -1;
+}
+
+header {
+    position: sticky;
+    background: #ffffff;
+    z-index: 10;
+    padding: 2px;
+    top: 0;
+}
+
+.step-title {
+    color: #1F3071;
+    margin-top: 20px;
+}
+
+.step-btn {
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column;
+    }
+
+    .step-line {
+        width: calc(100% - 60px);
+        left: 30px;
+    }
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #122D66;
+    ;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.active {
+    left: 0;
+}
+
+
+swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+swiper-slide {
+    text-align: center;
+    margin: 10px 0px;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.dropdownx-menu {
+    display: none;
+    overflow: hidden;
+    height: 0;
+    opacity: 0.6;
+    transition: height 0.3s ease-in-out;
+}
+
+
+
+.dropdownx-menu.active {
+    display: block;
+}
+
+
+.dropdownx-menu a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+}
+
+.rotate-icon {
+    margin-right: 75px;
+    transition: transform 0.3s ease;
+}
+
+.rotate-icon.active {
+    transform: rotate(180deg);
+}
+
+.menu-item {
+    position: relative;
+}
+
+nav ul .parent-item:hover {
+    background-color: orange;
+    transition: 0.2s all linear;
+    border-radius: 9px;
+}
+
+.division {
+    position: absolute;
+    width: 200px;
+    top: 104%;
+    left: 0;
+    border-radius: 5px 5px 2px 2px;
+    border-top: 5px solid orange;
+    background-color: #fff;
+    list-style: none;
+    opacity: 0;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform-origin: top;
+    transform: scaleY(0);
+    margin-left: -100px;
+    padding: 10px;
+    text-align: left;
+}
+
+
+.menu-item:hover .division {
+    opacity: 1;
+    transform: scaleY(1);
+    animation: slideFromBottom 1s forwards;
+}
+
+.division li a {
+    color: black;
+}
+
+.division li a:hover {
+    color: orange;
+    transition: 0.2s all linear;
+}
+
+@keyframes slideFromBottom {
+    from {
+        transform: scaleY(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+
+@media (max-width: 756px) {
+    .content {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+    }
+}
+
+.banner {
+    height: 520px;
+    border-radius: 10px;
+    background: url(/public/images/banner/tehran-iran-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #122D66;
+}
+
+.contactus {
+    background-color: orange;
+    border-radius: 10px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.contact-link {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+}
+
+.contact-tooltip {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    width: fit-content;
+}
+
+.contact-tooltip-instagram {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    bottom: -35px;
+    left: 75%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.contact-tooltip-telephone {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    bottom: -60px;
+    left: 20%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.contact-tooltip-postal {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    left: 50%;
+    bottom: -40px;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.contact-tooltip-email {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    left: 50%;
+    bottom: -40px;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.contact-link:hover .contact-tooltip {
+    display: block;
+}
+
+.contact-link:hover .contact-tooltip-instagram {
+    display: block;
+}
+
+.contact-link:hover .contact-tooltip-telephone {
+    display: block;
+}
+
+.contact-link:hover .contact-tooltip-email {
+    display: block;
+}
+
+.contact-link:hover .contact-tooltip-postal {
+    display: block;
+}
+
+.contact-link:hover {
+    transform: translateY(-5px);
+}
+
+
+.footer {
+    background: #1F3071;
+    color: #ffffff;
+    position: static;
+    text-align: center;
+    height: 100%;
+}
